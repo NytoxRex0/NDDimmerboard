@@ -8,7 +8,7 @@ This board contains 10 MOSFET AC dimmers for (Mains AC) LED bulbs in homes. The 
 The board dimmer circuitry is based on the following project: https://sound-au.com/project201.htm
 
 INPUTS:
-The board also contains 16 inputs for switches, this is done via 3.3v by just connecting a switch to the SWx terminal.
+The board also contains 16 inputs for switches, this is done via low-voltage by connecting a switch to the SWx terminal. The behaviour of each switch can be programmed to your desire.
 
 COMMUNICATIONS:
 The ESP32-WROOM-30pin, which acts as the master for this board, communicates to ESPHome/HomeAssitant with LAN with the help of a LAN8720 module OR via Wifi.
