@@ -10,4 +10,4 @@ The LAN8720 board has to be modified to remove the clk signal from the module an
 The ESP32 sends the commands for the dimmer outputs to three Arduino Nanos via UART, which use their internal timers to generate accurate timing for the MOSFETS. The MOSFETS are controlled via SI8752AB-IS ICs to isolate mains from the low-voltage electronics.
 More on the programming of the Arduino Nanos in a different file.
 
-The total cost of this project is given in the 'Costs' file.
+The total cost of this project is given in the 'Cost' file.
