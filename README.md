@@ -28,3 +28,6 @@ Comparing the cost to on the shelf components like Z-Wave FIBARO Dimmer 2 or Zig
 This board comes in at a cost of 11.20euros per channel.
 The FIBARO Dimmer 2 comes in at a cost of 50 euro per channel (it has more features like current measurement, which I do not need).
 The Tuya Dual channel dimmer module comes in at only 7.50euros per channel, however it's made in china and false CE standard do not encourage me to buy those.
+
+PCB:
+![PCB image](https://github.com/NytoxRex0/NDDimmerboard/TOP.jpg?raw=true)
