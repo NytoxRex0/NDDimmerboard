@@ -1,6 +1,8 @@
 # NDDimmerboard
 Dimmer board with 10 channels for ESPHome and HomeAssistant
 
+WARNING: Please do not replicate this project if you are not qualified to work with mains ac voltage! Replicate this project on your own risk!
+
 This board contains 10 MOSFET AC dimmers for (Mains AC) LED bulbs in homes. The board can be set-up in either leading-edge or trailing-edge dimmer modes, however trailing-edge is preferred. Each output is rated for +-1A for a total of 10A.
 The board also contains 16 inputs for switches, this is done via 3.3v by just connecting a switch to the SWx terminal.
 
