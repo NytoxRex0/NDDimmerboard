@@ -12,7 +12,7 @@ The board also contains 16 inputs for switches, this is done via low-voltage by 
 
 COMMUNICATIONS:
 The ESP32-WROOM-30pin, which acts as the master for this board, communicates to ESPHome/HomeAssitant with LAN with the help of a LAN8720 module OR via Wifi.
-The LAN8720 board has to be modified to remove the clk signal from the module and provide it from the ESP32, more on this in a post here: https://community.home-assistant.io/t/esp32-lan8720-need-help/316270/7 
+The LAN8720 board has to be modified to remove the clk signal from the module and provide it from the ESP32, more on this in a post here: https://community.home-assistant.io/t/esp32-lan8720-need-help/316270/7 or in the folder LAN8720.
 The ESP32 sends the commands for the dimmer outputs to three Arduino Nanos via UART, which use their internal timers to generate accurate timing for the MOSFETS. 
 The Arduino outputs can be programmed to be ramping or instant. For lighting purposes ramping is most likely the best, when turning on/off the brightness increases/decreases steadily (programmable time).
 For switching other devices 'instant' might be better, as this instantly alters the duty cycle. This is better when programming the input of the ESP as a switch rather than an AC-dimmer.
@@ -31,3 +31,9 @@ The Tuya Dual channel dimmer module comes in at only 7.50euros per channel, howe
 
 PCB:
 ![PCB image](https://github.com/NytoxRex0/NDDimmerboard/blob/main/TOP.jpg?raw=true)
+
+SOLDERED 1 CHANNEL:
+
+TEST 1 CHANNEL:
+
+FULL PCB:
