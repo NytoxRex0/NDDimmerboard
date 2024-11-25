@@ -30,7 +30,7 @@ The FIBARO Dimmer 2 comes in at a cost of 50 euro per channel (it has more featu
 The Tuya Dual channel dimmer module comes in at only 7.50euros per channel, however it's made in china and false CE standard do not encourage me to buy those.
 
 PCB:
-![PCB image](https://github.com/NytoxRex0/NDDimmerboard/blob/main/TOP.jpg?raw=true)
+![PCB image](https://github.com/NytoxRex0/NDDimmerboard/blob/main/IMG/TOP.jpg?raw=true)
 
 SOLDERED 1 CHANNEL:
 
