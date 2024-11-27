@@ -2,3 +2,4 @@
 - Change WIFI to LAN and add ESPHomeCode for LAN
 - Change Name of device to dimmerboard1,2,3
 - Create inputs in ESPHOME
+- Code on how to change FAST vs SLOW transition.
