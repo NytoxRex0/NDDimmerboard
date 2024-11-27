@@ -1,3 +1,4 @@
 - Remove debugging from Nano code
 - Change WIFI to LAN and add ESPHomeCode for LAN
 - Change Name of device to dimmerboard1,2,3
+- Create inputs in ESPHOME
