@@ -1,0 +1,379 @@
+esphome:
+  name: uarttest-master
+  friendly_name: uarttest-master
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "PUT KEY HERE"
+
+ota:
+  - platform: esphome
+    password: "PUT PW HERE"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: STATIC_IP HERE
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO04
+  baud_rate: 9600
+
+# Template output for the virtual dimmer
+output:
+  - platform: template
+    id: output1
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer1).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer1).current_values.get_brightness()*100));
+                  std::string str = "D01V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D01V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output2
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer2).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer2).current_values.get_brightness()*100));
+                  std::string str = "D02V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D02V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output3
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer3).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer3).current_values.get_brightness()*100));
+                  std::string str = "D03V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D03V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output4
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer4).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer4).current_values.get_brightness()*100));
+                  std::string str = "D04V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D04V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output5
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer5).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer5).current_values.get_brightness()*100));
+                  std::string str = "D05V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D05V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output6
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer6).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer6).current_values.get_brightness()*100));
+                  std::string str = "D06V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D06V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output7
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer7).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer7).current_values.get_brightness()*100));
+                  std::string str = "D07V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D07V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output8
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer8).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer8).current_values.get_brightness()*100));
+                  std::string str = "D08V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D08V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+  - platform: template
+    id: output9
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer9).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer9).current_values.get_brightness()*100));
+                  std::string str = "D09V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D09V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;  
+  - platform: template
+    id: output10
+    type: float
+    write_action: 
+      then:
+        - if:
+            condition:
+              - lambda: 'return id(dimmer10).current_values.is_on();'
+            then:
+              - uart.write: !lambda |-
+                  std::string val = to_string((int)(id(dimmer10).current_values.get_brightness()*100));
+                  std::string str = "D10V" + val + "\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+            else:
+              - uart.write: !lambda |-
+                  std::string str = "D10V0\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;
+              - delay: 0.1s
+              - uart.write: !lambda |-
+                  std::string str = "Done\n";
+                  std::vector<uint8_t> vec(str.begin(), str.end());
+                  return vec;                                                                                                                                              
+            
+# Dimmer Control (Expose to Home Assistant)
+light:
+  - platform: monochromatic
+    name: "Dimmer Channel 1"
+    id: dimmer1
+    output: output1
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 2"
+    id: dimmer2
+    output: output2
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 3"
+    id: dimmer3
+    output: output3
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 4"
+    id: dimmer4
+    output: output4
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 5"
+    id: dimmer5
+    output: output5
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 6"
+    id: dimmer6
+    output: output6
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 7"
+    id: dimmer7
+    output: output7
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 8"
+    id: dimmer8
+    output: output8
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 9"
+    id: dimmer9
+    output: output9
+    default_transition_length: 0s
+  - platform: monochromatic
+    name: "Dimmer Channel 10"
+    id: dimmer10
+    output: output10
+    default_transition_length: 0s
