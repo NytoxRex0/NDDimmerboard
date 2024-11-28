@@ -13,17 +13,17 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "LtSQz3AS8yt3CoM0jWEVAtEtVHvUMEMNPfbFd14WS88="
+    key: "KEY_HERE"
 
 ota:
   - platform: esphome
-    password: "dbf2adb29d532a5bd120087d36706464"
+    password: "PW_HERE"
 
 #wifi:
 #  ssid: !secret wifi_ssid
 #  password: !secret wifi_password
 #  manual_ip:
-#    static_ip: 192.168.0.196
+#    static_ip: STATIC_IP_HERE
 #    gateway: 192.168.0.1
 #    subnet: 255.255.255.0
 
@@ -35,7 +35,7 @@ ethernet:
   phy_addr: 1
 
   manual_ip:
-    static_ip: 192.168.0.196
+    static_ip: STATIC_IP_HERE
     gateway: 192.168.0.1
     subnet: 255.255.255.0
 
