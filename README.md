@@ -18,7 +18,7 @@ This board contains **10 MOSFET AC dimmers** for (Mains AC) LED bulbs in homes.
 - The MOSFETs are controlled via **SI8752AB-IS ICs** to ensure isolation between mains and low-voltage electronics.  
 
 The board's dimmer circuitry is based on the project:  
-[ESP Dimmer Project by Rod Elliott](https://sound-au.com/project201.htm)
+[Multi-Channel Trailing-Edge Dimmer System by Rod Elliott](https://sound-au.com/project201.htm)
 
 ---
 
