@@ -8,13 +8,15 @@ This board contains 10 MOSFET AC dimmers for (Mains AC) LED bulbs in homes. The 
 The board dimmer circuitry is based on the following project: https://sound-au.com/project201.htm
 
 INPUTS:
-The board also contains 16 inputs for switches, this is done via low-voltage by connecting a switch to the SWx terminal. The behaviour of each switch can be programmed to your desire.
+The board also contains 16 inputs for switches, this is done via low-voltage by connecting a switch to the SWx terminal. The behaviour of each switch can be programmed to your desire. As the board is designed to be used with LED lighting and momentary switches, the inputs are configured as follows: Short press -> Toggle light, Long press -> Dim up/down, Double press -> Max brightness
 
 COMMUNICATIONS:
 The ESP32-WROOM-30pin, which acts as the master for this board, communicates to ESPHome/HomeAssitant with LAN with the help of a LAN8720 module OR via Wifi.
 The LAN8720 board has to be modified to remove the clk signal from the module and provide it from the ESP32, more on this in a post here: https://community.home-assistant.io/t/esp32-lan8720-need-help/316270/7 or in the folder LAN8720.
 The ESP32 sends the commands for the dimmer outputs to three Arduino Nanos via UART, which use their internal timers to generate accurate timing for the MOSFETS. 
-The Arduino outputs can be programmed to be ramping or instant. For lighting purposes ramping is most likely the best, when turning on/off the brightness increases/decreases steadily (programmable time).
+
+NANOS:
+The Arduino outputs can be programmed to be ramping or instant. By default the code is set-up for ramping changes, as this board is meant to be used with LED lighting. For lighting purposes ramping is most likely the nicest, when turning on/off the brightness increases/decreases steadily (programmable time).
 For switching other devices 'instant' might be better, as this instantly alters the duty cycle. This is better when programming the input of the ESP as a switch rather than an AC-dimmer.
 The code of the Arduino Nanos and their details in the Arduino folder.
 
