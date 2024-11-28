@@ -50,9 +50,8 @@ void setup() {
 //INTERRUPTS
 //Pin 8 Interrupt Event on ZeroCross
 ISR(PCINT0_vect) {
-  // code to execute
   if (PINB & B00000001) {
-    //SET counters to TOP, cleared on next cycle. Reset timer to HIGH
+    //PIN change to high -> SET counters to TOP, cleared on next cycle. Reset timer to HIGH
     TCNT0 = 172;
     TCNT1 = 172;
     TCNT2 = 172;
