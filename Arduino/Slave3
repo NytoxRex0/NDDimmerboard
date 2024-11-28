@@ -1,6 +1,11 @@
 //This is the code for the third Nano board, this board controls channel 9 and 10
 //Designed and coded by N Dreverman
 
+//PINOUT
+//Pin 8  - ZeroCrossing input (interrupt)
+//Pin 9  - Channel 9  (Timer1A)
+//Pin 10 - Channel 10 (Timer1B)
+
 void setup() {
   Serial.begin(9600);
   Serial.setTimeout(1000);
@@ -10,9 +15,9 @@ void setup() {
   pinMode(10, OUTPUT);
   TCCR1A = 0;
   TCCR1B = 0;
-  TCCR1A |= (1<<WGM11) | (1<<COM1A1) | (1<<COM1B1);
-  TCCR1B |= (1<<CS12) | (1<<CS10) | (1<<WGM12) | (1<<WGM13);
-  ICR1 = 173; //TOP for 90Hz
+  TCCR1A |= (1<<WGM11) | (1<<COM1A1) | (1<<COM1B1); //Both outputs to Non-Inverting output AND WGM=14 (FastPWM with TOP = ICR1)
+  TCCR1B |= (1<<CS12) | (1<<CS10) | (1<<WGM12) | (1<<WGM13); //Prescaler of 1024
+  ICR1 = 173; //TOP for 90Hz with prescaler of 1024
   OCR1A = 50; //COMPARE register pin 9
   OCR1B = 50; //COMPARE register pin 10
 
@@ -25,10 +30,11 @@ void setup() {
 //INTERRUPTS
 //Pin 8 Interrupt Event on ZeroCross
 ISR(PCINT0_vect) {
-  // code to execute
   if (PINB & B00000001) {
-    //SET counters to TOP, cleared on next cycle. Reset timer to HIGH
+    //PIN change to high -> SET counters to TOP, cleared on next cycle. Reset timer to HIGH
+    TCNT0 = 172;
     TCNT1 = 172;
+    TCNT2 = 172;
   }
 }
 
@@ -97,15 +103,9 @@ void loop() {
       //New channel and values
       switch (chn) {
         case 9:
-          Serial.print("Channel 9 selected with value: ");
-          Serial.println(val);
-          // Add specific functionality for channel 1
           OCR1Atrgt = map(val, 0, 100, 0, 156);  //Map OCR1A (pin 9) from percentage to required values
         break;
         case 10:
-          Serial.print("Channel 10 selected with value: ");
-          Serial.println(val);
-          // Add specific functionality for channel 1
           OCR1Btrgt = map(val, 0, 100, 0, 156);  //Map OCR1B (pin 10) from percentage to required values
         break;
       }
@@ -140,7 +140,6 @@ void loop() {
   if ( (OCR1Avalu == 0 && OCR1Bvalu == 0) && (OCR1Aprev > 0 || OCR1Bprev > 0) ) {
     //Transition from non-zero to 0
     //Timer1 off
-    Serial.println("Turning timer1 off");
     OCR1A = 0;
     OCR1B = 0;
     TCNT1 = 173;
@@ -148,17 +147,14 @@ void loop() {
     TCCR1B &= ~((1 << CS12) | (1 << CS10)); // Disable the timer's prescaler (stop the timer)
     OCR1Aprev = 0;
     OCR1Bprev = 0;
-    Serial.println("timer1 off");
   } else if ( (OCR1Avalu > 0 || OCR1Bvalu > 0) && (OCR1Aprev == 0 && OCR1Bprev == 0) ) {
     //Transition from 0 to non-zero
-    Serial.println("Turning timer1 on");
     TCCR1A = 0;
     TCCR1B = 0;
     TCCR1A |= (1<<WGM11) | (1<<COM1A1) | (1<<COM1B1);
     TCCR1B |= (1<<CS12) | (1<<CS10) | (1<<WGM12) | (1<<WGM13); // Start the timer with the desired settings
     OCR1Aprev = 1;
     OCR1Bprev = 1;
-    Serial.println("timer1 on");
   }
 
   //SET THE REGISTER TO THE CURRENT VALUE
