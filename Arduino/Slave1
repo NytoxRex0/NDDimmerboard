@@ -1,6 +1,13 @@
 //This is the code for the first Nano board, this board controls channel 1 through 4
 //Designed and coded by N Dreverman
 
+//PINOUT
+//Pin 8  - ZeroCrossing input (interrupt)
+//Pin 3  - Channel 1 (Timer2)
+//Pin 5  - Channel 2 (Timer0)
+//Pin 9  - Channel 3 (Timer1A)
+//Pin 10 - Channel 4 (Timer1B)
+
 void setup() {
   Serial.begin(9600);
   Serial.setTimeout(1000);
