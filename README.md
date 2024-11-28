@@ -1,41 +1,90 @@
 # NDDimmerboard
-Dimmer board with 10 channels for ESPHome and HomeAssistant
 
-WARNING: Please do not replicate this project if you are not qualified to work with mains ac voltage! Replicate this project on your own risk!
+**Dimmer board with 10 channels for ESPHome and HomeAssistant**  
+This board was designed to reduce cost, complexity, and radio interference while maintaining good performance compared to off-the-shelf components.
 
-OUTPUTS:
-This board contains 10 MOSFET AC dimmers for (Mains AC) LED bulbs in homes. The board can be set-up in either leading-edge or trailing-edge dimmer modes, however trailing-edge is preferred. Each output is rated for +-1A for a total of 10A. The MOSFETS are controlled via SI8752AB-IS ICs to isolate mains from the low-voltage electronics.
-The board dimmer circuitry is based on the following project: https://sound-au.com/project201.htm
+---
 
-INPUTS:
-The board also contains 16 inputs for switches, this is done via low-voltage by connecting a switch to the SWx terminal. The behaviour of each switch can be programmed to your desire. As the board is designed to be used with LED lighting and momentary switches, the inputs are configured as follows: Short press -> Toggle light, Long press -> Dim up/down, Double press -> Max brightness
+## ⚠️ WARNING  
+**Please do not replicate this project if you are not qualified to work with mains AC voltage!**  
+Replicate this project at your own risk.
 
-COMMUNICATIONS:
-The ESP32-WROOM-30pin, which acts as the master for this board, communicates to ESPHome/HomeAssitant with LAN with the help of a LAN8720 module OR via Wifi.
-The LAN8720 board has to be modified to remove the clk signal from the module and provide it from the ESP32, more on this in a post here: https://community.home-assistant.io/t/esp32-lan8720-need-help/316270/7 or in the folder LAN8720.
-The ESP32 sends the commands for the dimmer outputs to three Arduino Nanos via UART, which use their internal timers to generate accurate timing for the MOSFETS. 
+---
 
-NANOS:
-The Arduino outputs can be programmed to be ramping or instant. By default the code is set-up for ramping changes, as this board is meant to be used with LED lighting. For lighting purposes ramping is most likely the nicest, when turning on/off the brightness increases/decreases steadily (programmable time).
-For switching other devices 'instant' might be better, as this instantly alters the duty cycle. This is better when programming the input of the ESP as a switch rather than an AC-dimmer.
-The code of the Arduino Nanos and their details in the Arduino folder.
+## OUTPUTS  
+This board contains **10 MOSFET AC dimmers** for (Mains AC) LED bulbs in homes.  
+- The board can be set up in either **leading-edge** or **trailing-edge dimmer modes**, although trailing-edge is preferred.  
+- **Output Rating:** Each output supports approximately ±1A, for a total of 10A across all channels.  
+- The MOSFETs are controlled via **SI8752AB-IS ICs** to ensure isolation between mains and low-voltage electronics.  
 
-DIMENSIONS :
-The board is 200mm x 202mm in size, the GERBER file is given in the 'NDDimmerBoardV20241122.zip' file. Obviously this board does not fit in standard electrical boxes on which you mount your switch, however this board is quite compact and will fit in most mains cabinets.
+The board's dimmer circuitry is based on the project:  
+[ESP Dimmer Project by Rod Elliott](https://sound-au.com/project201.htm)
 
-COST:
-The total cost of this project is 112.02euros as elaborated in the 'Cost' file.
-This board was developed to decrease cost, complexity and radio interference. 
-Comparing the cost to on the shelf components like Z-Wave FIBARO Dimmer 2 or Zigbee Tuya dual channel dimmers, the cost is respectable.
-This board comes in at a cost of 11.20euros per channel.
-The FIBARO Dimmer 2 comes in at a cost of 50 euro per channel (it has more features like current measurement, which I do not need).
-The Tuya Dual channel dimmer module comes in at only 7.50euros per channel, however it's made in china and false CE standard do not encourage me to buy those.
+---
 
-PCB:
-![PCB image](https://github.com/NytoxRex0/NDDimmerboard/blob/main/IMG/TOP.jpg?raw=true)
+## INPUTS  
+The board supports **16 low-voltage inputs for switches**, connected via the SWx terminal.  
+Inputs are configured for **LED lighting** and **momentary switches** with the following behavior:  
+- **Short press:** Toggle light  
+- **Long press:** Dim up/down  
+- **Double press:** Max brightness  
 
-SOLDERED 1 CHANNEL:
+---
 
-TEST 1 CHANNEL:
+## COMMUNICATIONS  
+The ESP32-WROOM-30pin is the **master controller** for the board. It communicates with ESPHome/HomeAssistant via:  
+- **LAN** (using a LAN8720 module)  
+- **Wi-Fi**  
 
-FULL PCB:
+**LAN8720 Module Modification:**  
+The module must be modified to remove the CLK signal and provide it from the ESP32.  
+For more information, see:  
+- [Home Assistant Community Post](https://community.home-assistant.io/t/esp32-lan8720-need-help/316270/7)  
+- **Folder:** `LAN8720`  
+
+The ESP32 communicates with three Arduino Nanos via **UART** to send dimmer output commands. The Nanos use internal timers to ensure accurate timing for the MOSFETs.
+
+---
+
+## ARDUINO NANOS  
+- **Default Mode:** Ramping (brightness increases/decreases steadily for smooth transitions).  
+  - Ideal for LED lighting.  
+- **Instant Mode:** Changes are immediate (no ramping).  
+  - Better for non-dimmer switch functionality.  
+
+The Nano code and configuration details are in the `Arduino` folder.
+
+---
+
+## DIMENSIONS  
+- **Board Size:** 200mm x 202mm  
+- The **GERBER file** is included in `NDDimmerBoardV20241122.zip`.  
+- The board does not fit into standard electrical boxes but is compact enough for most mains cabinets.
+
+---
+
+## COST  
+- **Total Project Cost:** €112.02 (see `Cost` file for details).  
+- **Cost per Channel:** €11.20  
+
+### Comparison with Commercial Solutions:  
+1. **FIBARO Dimmer 2:**  
+   - Cost: €50 per channel  
+   - Additional Features: Current measurement (not needed for this project)  
+2. **Zigbee Tuya Dual Channel Dimmer:**  
+   - Cost: €7.50 per channel  
+   - Note: Manufactured in China with questionable CE standards  
+
+---
+
+## PCB  
+![PCB Image](https://github.com/NytoxRex0/NDDimmerboard/blob/main/IMG/TOP.jpg?raw=true)  
+
+---
+
+### Additional Images:  
+- **SOLDERED 1 CHANNEL:** *(Include a relevant image if available)*  
+- **TEST 1 CHANNEL:** *(Include a relevant image if available)*  
+- **FULL PCB:** *(Include a relevant image if available)*  
+
+---
